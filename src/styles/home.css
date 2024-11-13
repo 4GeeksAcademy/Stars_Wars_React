@@ -1,0 +1,66 @@
+button:hover {
+  background-color: #d3d3d3;
+}
+
+.fondo-img {
+  background-image: url(https://www.somosxbox.com/wp-content/uploads/2015/07/Starwars_Battlefront_Wallpaper_2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+}
+
+.lista-contenedor {
+  background-image: url(https://lumiere-a.akamaihd.net/v1/images/star-wars-backgrounds-25_bc15ec98.jpeg?download=true);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.text-img {
+  font-size: 75px;
+  text-shadow: 0 0 16px white;
+  color: transparent;
+  -webkit-text-stroke: 2px white;
+}
+
+.lista-personajes {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 700px;
+}
+
+.lista-personajes::-webkit-scrollbar {
+  scrollbar-width: thin;
+  width: 20px;
+  background-color: transparent;
+}
+
+.lista-personajes::-webkit-scrollbar-thumb {
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 5px;
+  cursor: grab;
+}
+
+.lista-personajes::-webkit-scrollbar-thumb:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.lista-personajes::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
+}
+
+.boton:hover {
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 2px white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  border: 2px solid white !important;
+}
+.boton:active {
+  transform: scale(0.95);
+}
+input:focus {
+  outline: none !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7) !important;
+}

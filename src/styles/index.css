@@ -1,3 +1,45 @@
-/* 
-    General Styles
-*/
+body {
+  background-color: black;
+}
+.img {
+  width: 100px;
+  height: 60px;
+}
+
+.img-footer {
+  width: 100px;
+  height: 80px;
+}
+
+.borde-luz {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.luz {
+  text-shadow: 0 0 4px white;
+}
+
+.fondo {
+  background-image: url(https://i.pinimg.com/originals/af/f5/86/aff586e5a92ad7b4dab6c16d2ee60814.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+  background-color: rgb(66, 66, 66);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(133, 133, 133, 0.5);
+  border-radius: 5px;
+  cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
+}
