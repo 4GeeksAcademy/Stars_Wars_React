@@ -27,7 +27,7 @@ button:hover {
 .lista-personajes {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 700px;
+  height: 800px;
 }
 
 .lista-personajes::-webkit-scrollbar {
@@ -60,7 +60,49 @@ button:hover {
 .boton:active {
   transform: scale(0.95);
 }
+
+.boton-valor {
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 2px white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  border: 2px solid white !important;
+}
+.boton-valor:active {
+  transform: scale(0.95);
+}
+
 input:focus {
   outline: none !important;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.7) !important;
+}
+
+button:focus {
+  outline: none !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7) !important;
+}
+.flechas {
+  padding: 5px 20px;
+}
+.flechas:hover {
+  background-color: black;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 2px white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.flechas:active {
+  transform: scale(0.95);
+}
+
+.flecha-desactivada {
+  padding: 5px 20px;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 2px white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  opacity: 0.5;
+}
+
+.borde-carta {
+  box-shadow: 0 0 15px rgba(137, 137, 137, 0.7);
 }

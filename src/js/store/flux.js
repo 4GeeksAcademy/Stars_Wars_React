@@ -3,36 +3,19 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       All: [],
       personajes: [],
-      DatosPersonajes: [],
       Naves: [],
       Peliculas: [],
       Especies: [],
       Vehiculos: [],
       Planetas: [],
+      Favoritos: [],
+      Valor: 10,
     },
     actions: {
       // Use getActions to call a functiaon within a fuction
-
-      ConseguirDatosPersonajes: (Personajes) => {
-        Personajes.map(async (element) => {
-          try {
-            const respuesta = await fetch(`${element.url}`);
-            let datos = await respuesta.json();
-
-            datos = {
-              id: element.uid,
-              gender: datos.result.properties.gender,
-              height: datos.result.properties.height,
-              name: datos.result.properties.name,
-              img: `https://starwars-visualguide.com/assets/img/characters/${element.uid}.jpg`,
-            };
-            await setStore({
-              DatosPersonajes: [...getStore().DatosPersonajes, datos],
-              All: [...getStore().All, datos],
-            });
-          } catch (error) {
-            console.log(error);
-          }
+      CambiarValor: (num) => {
+        setStore({
+          Valor: num,
         });
       },
       ConseguirPersonajes: async () => {
@@ -40,10 +23,20 @@ const getState = ({ getStore, getActions, setStore }) => {
           const respuesta = await fetch(
             `https://www.swapi.tech/api/people?page=0&limit=100`
           );
-          const datos = await respuesta.json();
-          console.log(datos);
-          setStore({ personajes: datos.results });
-          getActions().ConseguirDatosPersonajes(datos.results);
+          let datos = await respuesta.json();
+          datos = datos.results;
+
+          datos.map((elem) => {
+            datos = {
+              uid: elem.uid,
+              name: elem.name,
+              url: `https://starwars-visualguide.com/assets/img/characters/${elem.uid}.jpg`,
+            };
+            setStore({
+              personajes: [...getStore().personajes, datos],
+              All: [...getStore().All, datos],
+            });
+          });
         } catch (error) {
           console.log(error);
         }
@@ -99,7 +92,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           const respuesta = await fetch(
             `https://www.swapi.tech/api/films?page=0&limit=100`
           );
-          console.log(respuesta);
           let datos = await respuesta.json();
           datos = datos.result;
 
