@@ -1,24 +1,23 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
-const Boton = (props) => {
+const Boton = ({ valor }) => {
   const { store, actions } = useContext(Context);
   return (
     <div className="col-6 text-center">
       <button
         className={
-          store.Valor === props.valor ||
-          (store.Valor === 300 && props.valor === "ALL")
+          store.Valor === valor || (store.Valor === 300 && valor === "ALL")
             ? "boton-valor btn bg-black border border-2 text-white fw-bold w-75"
             : "btn bg-black border border-2 text-white fw-bold opacity-50 w-75"
         }
         onClick={() => {
-          props.valor === "ALL"
+          valor === "ALL"
             ? actions.CambiarValor(300)
-            : actions.CambiarValor(props.valor);
+            : actions.CambiarValor(valor);
         }}
       >
-        {props.valor === "ALL" ? "ALL" : props.valor + "-" + props.valor}
+        {valor === "ALL" ? "ALL" : valor + "-" + valor}
       </button>
     </div>
   );

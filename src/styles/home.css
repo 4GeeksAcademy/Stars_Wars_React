@@ -2,6 +2,11 @@ button:hover {
   background-color: #d3d3d3;
 }
 
+.carta:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
 .fondo-img {
   background-image: url(https://www.somosxbox.com/wp-content/uploads/2015/07/Starwars_Battlefront_Wallpaper_2.jpg);
   background-repeat: no-repeat;
@@ -81,7 +86,8 @@ button:focus {
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.7) !important;
 }
 .flechas {
-  padding: 5px 20px;
+  font-size: 25px;
+  padding: 10px 60px;
 }
 .flechas:hover {
   background-color: black;
@@ -96,7 +102,8 @@ button:focus {
 }
 
 .flecha-desactivada {
-  padding: 5px 20px;
+  font-size: 25px;
+  padding: 10px 60px;
   box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
   text-shadow: 0 0 2px white;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
@@ -105,4 +112,19 @@ button:focus {
 
 .borde-carta {
   box-shadow: 0 0 15px rgba(137, 137, 137, 0.7);
+}
+
+.icono_favoritos {
+  background: rgba(0, 0, 0, 0.5);
+  font-weight: 900;
+  position: absolute !important;
+  width: 20px;
+  height: 20px;
+  box-shadow: 0 0 10px yellow;
+}
+
+@media (max-width: 450px) {
+  .card {
+    width: 10rem !important;
+  }
 }

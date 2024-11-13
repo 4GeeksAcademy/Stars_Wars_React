@@ -13,6 +13,20 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
     actions: {
       // Use getActions to call a functiaon within a fuction
+      QuitarFavoritos: (nombre) => {
+        let TablaFiltrada = getStore().Favoritos.filter(
+          (elem) => elem.nombre !== nombre
+        );
+        console.log(TablaFiltrada);
+        setStore({
+          Favoritos: [TablaFiltrada],
+        });
+      },
+      AgregarFavoritos: (obj) => {
+        setStore({
+          Favoritos: [...getStore().Favoritos, obj],
+        });
+      },
       CambiarValor: (num) => {
         setStore({
           Valor: num,
@@ -155,12 +169,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
           console.log(error);
         }
-      },
-
-      loadSomeData: () => {
-        /**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
       },
     },
   };

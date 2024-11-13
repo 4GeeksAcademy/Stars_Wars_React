@@ -1,16 +1,13 @@
-import React, { useContext, useState } from "react";
-import { Context } from "../store/appContext";
+import React from "react";
 
-const Action = (props) => {
-  const { store, actions } = useContext(Context);
-
+const Action = ({ titulo }) => {
   return (
     <button
       type="button"
       for="option"
       class="list-group-item list-group-item-action boton bg-dark fw-bold text-white border-white border-1 rounded-0"
     >
-      {props.titulo}
+      {titulo}
     </button>
   );
 };

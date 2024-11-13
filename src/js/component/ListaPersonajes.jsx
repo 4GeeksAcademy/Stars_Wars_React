@@ -3,63 +3,33 @@ import Carta from "./Carta.jsx";
 import Action from "./Action.jsx";
 import { Context } from "../store/appContext.js";
 import Boton from "./Boton.jsx";
+import Paginacion from "./Paginacion.jsx";
 
 const ListaPersonajes = () => {
   const { store, actions } = useContext(Context);
-
-  const [Page, setPage] = useState([0, store.Valor]);
+  const [Pagina, setPagina] = useState([0, store.Valor]);
   const [Tabla, setTabla] = useState(store.personajes);
-
   useEffect(() => {
-    setPage([0, store.Valor]);
+    setPagina([0, store.Valor]);
   }, [store.Valor]);
-
   useEffect(() => {
     setTabla(store.personajes);
   }, [store.personajes]);
+
+  const handleElementoBuscar = (e) => {
+    setTabla(Tabla.filter((elem) => elem.name.includes(e.target.value)));
+  };
   return (
     <div className=" lista-contenedor bg-dark py-3 borde-luz">
-      <div className="row">
-        <div className="col-lg-9 col-md-12 d-flex justify-content-center">
-          <div
-            className={
-              Page[0] === 0
-                ? "luz text-white borde-luz border flecha-desactivada rounded-pill mx-3 mb-3"
-                : "luz text-white borde-luz border flechas rounded-pill mx-3 mb-3"
-            }
-            onClick={() => {
-              Page[0] === 0
-                ? ""
-                : setPage([Page[0] - store.Valor, Page[1] - store.Valor]);
-            }}
-          >
-            <span aria-hidden="true">&laquo;</span>
-          </div>
-
-          <div
-            className={
-              Page[1] > Tabla.length
-                ? "luz text-white borde-luz border flecha-desactivada rounded-pill mx-3 mb-3"
-                : "luz text-white borde-luz border flechas rounded-pill mx-3 mb-3"
-            }
-            onClick={() => {
-              Page[1] > Tabla.length
-                ? ""
-                : setPage([Page[0] + store.Valor, Page[1] + store.Valor]);
-            }}
-          >
-            <span aria-hidden="true">&raquo;</span>
-          </div>
-        </div>
-      </div>
+      <Paginacion funcion={setPagina} pagina={Pagina} tabla={Tabla} />
       <div className="row m-0 p-0">
         <div className="col-lg-9 col-md-12 lista-personajes">
           <div className="row">
             <div className="row p-3 justify-content-center ">
-              {Tabla.slice(Page[0], Page[1]).map((elem) => {
+              {Tabla.slice(Pagina[0], Pagina[1]).map((elem) => {
                 return (
                   <Carta
-                    id={elem.id === undefined ? elem.uid : elem.id}
+                    id={elem.uid}
                     nombre={elem.name}
                     url={elem.img === undefined ? elem.url : elem.img}
                   />
@@ -80,7 +50,7 @@ const ListaPersonajes = () => {
             <div
               onClick={() => {
                 setTabla(store.personajes);
-                setPage([0, store.Valor]);
+                setPagina([0, store.Valor]);
               }}
             >
               <Action titulo="CHARACTERS" />
@@ -88,7 +58,7 @@ const ListaPersonajes = () => {
             <div
               onClick={() => {
                 setTabla(store.Peliculas);
-                setPage([0, store.Valor]);
+                setPagina([0, store.Valor]);
               }}
             >
               <Action titulo="Films" />
@@ -96,7 +66,7 @@ const ListaPersonajes = () => {
             <div
               onClick={() => {
                 setTabla(store.Naves);
-                setPage([0, store.Valor]);
+                setPagina([0, store.Valor]);
               }}
             >
               <Action titulo="Starships" />
@@ -104,7 +74,7 @@ const ListaPersonajes = () => {
             <div
               onClick={() => {
                 setTabla(store.Vehiculos);
-                setPage([0, store.Valor]);
+                setPagina([0, store.Valor]);
               }}
             >
               <Action titulo="Vehicles" />
@@ -112,7 +82,7 @@ const ListaPersonajes = () => {
             <div
               onClick={() => {
                 setTabla(store.Especies);
-                setPage([0, store.Valor]);
+                setPagina([0, store.Valor]);
               }}
             >
               <Action titulo="Species" />
@@ -120,18 +90,21 @@ const ListaPersonajes = () => {
             <div
               onClick={() => {
                 setTabla(store.Planetas);
-                setPage([0, store.Valor]);
+                setPagina([0, store.Valor]);
               }}
             >
               <Action titulo="Planets" />
             </div>
             <div
+              className={
+                store.Favoritos.length === 0 ? "opacity-75 disabled" : ""
+              }
               onClick={() => {
-                setTabla(store.Favoritos);
-                setPage([0, store.Valor]);
+                store.Favoritos.length === 0 ? "" : setTabla(store.Favoritos);
+                setPagina([0, store.Valor]);
               }}
             >
-              <Action titulo="Favotitos" />
+              <Action titulo="Favorites" />
             </div>
           </div>
           <div className="d-flex flex-column mt-3">
@@ -139,6 +112,7 @@ const ListaPersonajes = () => {
               type="text"
               className="form-control align-content-end rounded-0 bg-black text-white text-center fw-bold"
               placeholder="Search"
+              onChange={handleElementoBuscar}
             />
             <p className="fw-bold text-white text-center">
               You can search by typing the name of what you need to look for.
@@ -172,16 +146,3 @@ const ListaPersonajes = () => {
 };
 
 export default ListaPersonajes;
-// {store.DatosPersonajes.map((elem) => {
-//   console.log(elem);
-
-//   return (
-//     <Carta
-//       id={elem.id}
-//       nombre={elem.name}
-//       genero={elem.gender}
-//       altura={elem.height}
-//       url={elem.img}
-//     />
-//   );
-// })}
