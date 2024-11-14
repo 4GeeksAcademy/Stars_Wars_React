@@ -1,35 +1,67 @@
-import React, { useContext, useState } from "react";
-import { CiStar } from "react-icons/ci";
-import { FaStar } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 
-const Carta = ({ id, nombre, url }) => {
+const Carta = ({ id, nombre, url, categoria }) => {
   const { store, actions } = useContext(Context);
   const [Favorito, setFavorito] = useState(false);
+  const [eliminar, setEliminar] = useState(false);
+
+  useEffect(() => {
+    Favorito === true
+      ? actions.AgregarFavoritos({
+          uid: id,
+          name: nombre,
+          img: url,
+          categoria: "Favorite",
+        })
+      : "";
+  }, [Favorito]);
+  useEffect(() => {
+    store.Favoritos.find((elem) => {
+      if (elem.img === url) {
+        setFavorito(elem.name);
+      }
+    });
+  });
   return (
     <div
-      className="col-xxl-2 mx-xxl-3 col-xl-3 col-lg-4 col-md-4 col-6 mb-2 h-auto carta"
-      onClick={() => {
-        setFavorito(Favorito === false ? true : false);
-        Favorito === true
-          ? actions.QuitarFavoritos(nombre)
-          : actions.AgregarFavoritos({ uid: id, nombre: nombre, img: url });
-      }}
+      className={
+        eliminar === true && categoria === "Favorite"
+          ? "d-none"
+          : "col-xxl-2 mx-xxl-3 col-xl-3 col-lg-4 col-md-4 col-6 mb-2 h-auto carta"
+      }
     >
       <div
         class="card p-0 m-0 border-3 borde-carta border-white  fondo m-2 "
         style={{ width: "11rem" }}
       >
-        <div className="text-warning ">
-          {Favorito === false ? (
-            <CiStar className="m-0 icono_favoritos luz" />
-          ) : (
-            <FaStar className="m-0 icono_favoritos luz" />
-          )}
+        <div
+          className={
+            Favorito === nombre && categoria != "Favorite"
+              ? "d-none"
+              : "row m-0 bg-white text-warning fw-bold py-1"
+          }
+          onClick={() => {
+            categoria === "Favorite"
+              ? actions.QuitarFavoritos(nombre)
+              : setFavorito(Favorito === false ? true : false);
+
+            categoria === "Favorite" ? setEliminar(true) : "";
+          }}
+        >
+          <div
+            className={
+              categoria === "Favorite"
+                ? "col-12 text-center text-danger fw-bold mx-0"
+                : "col-12 text-center mx-0"
+            }
+          >
+            <span>{categoria === "Favorite" ? "Delete" : "AddToFavorite"}</span>
+          </div>
         </div>
         <img
           src={url}
-          class="card-img-top border-bottom borde-carta border-white"
+          class="card-img-top border-bottom borde-carta border-white rounded-0"
           alt=""
         />
         <div class="text-center text-white">
@@ -42,8 +74,7 @@ const Carta = ({ id, nombre, url }) => {
                 See More
               </button>
             </div>
-
-            <div className="col-4 text-end align-content-end">
+            <div className="col-4 text-end align-content-end id">
               <span className=" pt-1 px-2 bg-carta rounded-0 border-white border border-2 border-end-0 border-bottom-0 borde-carta luz fw-bold text-white ">
                 {id}
               </span>

@@ -32,6 +32,7 @@ const ListaPersonajes = () => {
                     id={elem.uid}
                     nombre={elem.name}
                     url={elem.img === undefined ? elem.url : elem.img}
+                    categoria={elem.categoria}
                   />
                 );
               })}

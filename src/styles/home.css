@@ -3,7 +3,7 @@ button:hover {
 }
 
 .carta:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   cursor: pointer;
 }
 
@@ -115,16 +115,21 @@ button:focus {
 }
 
 .icono_favoritos {
-  background: rgba(0, 0, 0, 0.5);
   font-weight: 900;
-  position: absolute !important;
-  width: 20px;
-  height: 20px;
-  box-shadow: 0 0 10px yellow;
+  width: 27px;
+  height: 27px;
+  box-shadow: 0 0 5px yellow;
+  border-radius: 50%;
 }
 
 @media (max-width: 450px) {
   .card {
     width: 10rem !important;
+  }
+  .lista-personajes {
+    height: 850px !important;
+  }
+  .id {
+    font-size: 15px !important;
   }
 }

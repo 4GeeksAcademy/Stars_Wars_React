@@ -15,16 +15,34 @@ const getState = ({ getStore, getActions, setStore }) => {
       // Use getActions to call a functiaon within a fuction
       QuitarFavoritos: (nombre) => {
         let TablaFiltrada = getStore().Favoritos.filter(
-          (elem) => elem.nombre !== nombre
+          (elem) => elem.name != nombre
         );
         console.log(TablaFiltrada);
+        if (TablaFiltrada.length === 0) {
+          setStore({
+            Favoritos: [],
+          });
+        }
         setStore({
-          Favoritos: [TablaFiltrada],
+          Favoritos: TablaFiltrada,
         });
+        // TablaFiltrada.length <= 0
+        //   ? setStore({
+        //       Favoritos: [],
+        //     })
+        //   : setStore({
+        //       Favoritos: [TablaFiltrada],
+        //     });
       },
-      AgregarFavoritos: (obj) => {
+      AgregarFavoritos: ({ uid, name, img, categoria }) => {
+        const objeto = {
+          name: name,
+          uid: uid,
+          img: img,
+          categoria: categoria,
+        };
         setStore({
-          Favoritos: [...getStore().Favoritos, obj],
+          Favoritos: [...getStore().Favoritos, objeto],
         });
       },
       CambiarValor: (num) => {
@@ -42,6 +60,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           datos.map((elem) => {
             datos = {
+              categoria: "Character",
               uid: elem.uid,
               name: elem.name,
               url: `https://starwars-visualguide.com/assets/img/characters/${elem.uid}.jpg`,
@@ -65,9 +84,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           datos.map((elem) => {
             datos = {
+              categoria: "Vehicle",
               uid: elem.uid,
               name: elem.name,
-              url: `https://starwars-visualguide.com/assets/img/vehicles/${elem.uid}.jpg`,
+              url:
+                elem.uid > 42
+                  ? "https://www.historylatam.com/sites/default/files/styles/facebook_card_1200x630/public/images/2023/08/11/Pregunta%20espacial.jpg"
+                  : `https://starwars-visualguide.com/assets/img/vehicles/${elem.uid}.jpg`,
             };
             setStore({
               Vehiculos: [...getStore().Vehiculos, datos],
@@ -85,12 +108,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           );
           let datos = await respuesta.json();
           datos = datos.results;
-
           datos.map((elem) => {
             datos = {
+              categoria: "Planet",
               uid: elem.uid,
               name: elem.name,
-              url: `https://starwars-visualguide.com/assets/img/planets/${elem.uid}.jpg`,
+              url:
+                elem.uid === "1" || elem.uid == 20 || elem.uid > 21
+                  ? "https://img.freepik.com/fotos-premium/ilustracion-enorme-signo-interrogacion-planeta-tierra-imagen-generada-ia_1009902-10826.jpg"
+                  : `https://starwars-visualguide.com/assets/img/planets/${elem.uid}.jpg`,
             };
             setStore({
               Planetas: [...getStore().Planetas, datos],
@@ -111,6 +137,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           datos.map((elem) => {
             datos = {
+              categoria: "Film",
               uid: elem.properties.episode_id,
               name: elem.properties.title,
               url: `https://starwars-visualguide.com/assets/img/films/${elem.properties.episode_id}.jpg`,
@@ -134,6 +161,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           datos.map((elem) => {
             datos = {
+              categoria: "Specie",
               uid: elem.uid,
               name: elem.name,
               url: `https://starwars-visualguide.com/assets/img/species/${elem.uid}.jpg`,
@@ -157,9 +185,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           datos.map((elem) => {
             datos = {
+              categoria: "Starship",
               uid: elem.uid,
               name: elem.name,
-              url: `https://starwars-visualguide.com/assets/img/starships/${elem.uid}.jpg`,
+              url:
+                elem.uid == 2 ||
+                elem.uid == 3 ||
+                elem.uid == 17 ||
+                elem.uid == 32 ||
+                elem.uid > 48
+                  ? "https://www.historylatam.com/sites/default/files/styles/facebook_card_1200x630/public/images/2023/08/11/Pregunta%20espacial.jpg"
+                  : `https://starwars-visualguide.com/assets/img/starships/${elem.uid}.jpg`,
             };
             setStore({
               Naves: [...getStore().Naves, datos],
