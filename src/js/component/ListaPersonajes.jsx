@@ -9,6 +9,17 @@ const ListaPersonajes = () => {
   const { store, actions } = useContext(Context);
   const [Pagina, setPagina] = useState([0, store.Valor]);
   const [Tabla, setTabla] = useState(store.personajes);
+  const [Input, setInput] = useState("");
+
+  const Buscar = () => {
+    setTabla(Tabla.filter((elem) => elem.name.toLowerCase().includes(Input)));
+  };
+
+  useEffect(() => {
+    setTabla(store.All);
+    Buscar();
+  }, [Input]);
+
   useEffect(() => {
     setPagina([0, store.Valor]);
   }, [store.Valor]);
@@ -17,11 +28,19 @@ const ListaPersonajes = () => {
   }, [store.personajes]);
 
   const handleElementoBuscar = (e) => {
-    setTabla(Tabla.filter((elem) => elem.name.includes(e.target.value)));
+    Input.length > e.target.value.length ? setTabla(store.All) : "";
+    setInput(e.target.value);
+    e.target.value.length === 0 ? setTabla(store.All) : "";
+    console.log(Tabla + "handle");
   };
   return (
     <div className=" lista-contenedor bg-dark py-3 borde-luz">
-      <Paginacion funcion={setPagina} pagina={Pagina} tabla={Tabla} />
+      <Paginacion
+        funcion={setPagina}
+        pagina={Pagina}
+        tabla={Tabla}
+        inputFuncion={handleElementoBuscar}
+      />
       <div className="row m-0 p-0">
         <div className="col-lg-9 col-md-12 lista-personajes">
           <div className="row">
@@ -107,17 +126,6 @@ const ListaPersonajes = () => {
             >
               <Action titulo="Favorites" />
             </div>
-          </div>
-          <div className="d-flex flex-column mt-3">
-            <input
-              type="text"
-              className="form-control align-content-end rounded-0 bg-black text-white text-center fw-bold"
-              placeholder="Search"
-              onChange={handleElementoBuscar}
-            />
-            <p className="fw-bold text-white text-center">
-              You can search by typing the name of what you need to look for.
-            </p>
           </div>
           <div className="my-3">
             <p className="text-white luz text-center fw-bold">

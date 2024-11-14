@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
 
-const Paginacion = ({ funcion, pagina, tabla }) => {
+const Paginacion = ({ funcion, pagina, tabla, inputFuncion }) => {
   const { store, actions } = useContext(Context);
   return (
     <div className=" m-0">
@@ -20,7 +20,12 @@ const Paginacion = ({ funcion, pagina, tabla }) => {
         >
           <span aria-hidden="true">&laquo;</span>
         </div>
-
+        <input
+          type="text"
+          className="form-control align-content-end rounded-0 bg-black text-danger text-center fw-bold w-100 rounded-pill"
+          placeholder="Search"
+          onChange={inputFuncion}
+        />
         <div
           className={
             pagina[1] > tabla.length

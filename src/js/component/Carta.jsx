@@ -68,6 +68,9 @@ const Carta = ({ id, nombre, url, categoria }) => {
           <p class="card-title py-2 fw-bold">
             {nombre === "unknown" ? " ¿?" : nombre}
           </p>
+          <p class="card-title luz fw-bold">
+            {categoria === "unknown" ? " ¿?" : categoria}
+          </p>
           <div className="row pt-3">
             <div className="col-8">
               <button className="fw-bold text-white btn btn-outline-dark w-100 rounded-0 border-3 border-bottom-0 border-start-0 borde-carta border-white">
