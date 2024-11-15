@@ -206,6 +206,105 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.log(error);
         }
       },
+
+      SacarId: (url) => {
+        const id = url.slice(url.length - 2, url.length - 1).includes("/")
+          ? url.slice(-1)
+          : url.slice(-2);
+        return id;
+      },
+      FiltrarTabla: (arr1, arr2) => {
+        let tabla = [];
+        const arrAFiltar = arr1.filter((elem) => {
+          const arrBFiltrar = arr2.find((personaje) => {
+            if (personaje.uid === getActions().SacarId(elem)) {
+              tabla.push(personaje.name);
+            }
+          });
+        });
+        return tabla;
+      },
+      ConseguirDatosInvidual: async (categoria, id) => {
+        try {
+          const respuesta = await fetch(
+            `https://www.swapi.tech/api/${
+              categoria === "Character"
+                ? "people"
+                : categoria.toLowerCase() + "s"
+            }/${id}`
+          );
+          let datos = await respuesta.json();
+          datos = datos.result;
+
+          switch (categoria.toLowerCase()) {
+            case "character":
+              const planetaUrl = datos.properties.homeworld;
+              const id_planeta = getActions().SacarId(planetaUrl);
+
+              const planeta = getStore().Planetas.find(
+                (elem) => elem.uid === id_planeta
+              );
+              datos = {
+                nombre_planeta: planeta.name,
+                id_planeta: planeta.uid,
+                img_planeta: planeta.url,
+                nombre: datos.properties.name,
+                id: datos.uid,
+                descripcion: datos.description,
+                color_ojos: datos.properties.eye_color,
+                genero: datos.properties.gender,
+                color_pelo: datos.properties.hair_color,
+                altura: datos.properties.height,
+                planeta: datos.properties.homeworld,
+                mass: datos.properties.mass,
+                color_skin: datos.properties.skin_color,
+              };
+              console.log(datos);
+              return datos;
+            case "film":
+              let ejemplo = [];
+              const lista = datos.properties.characters.filter((elem) => {
+                const a = getStore().personajes.find((personaje) => {
+                  if (personaje.uid === getActions().SacarId(elem)) {
+                    ejemplo.push(personaje.name);
+                  }
+                });
+              });
+              console.log(ejemplo);
+              console.log(datos);
+              datos = {
+                title: datos.properties.title,
+                id: datos.uid,
+                descripcion: datos.description,
+                director: datos.properties.director,
+                texto_apertura: datos.properties.opening_crawl,
+                productor: datos.properties.producer,
+                fecha_salida: datos.properties.release_date,
+                planeta: datos.properties.homeworld,
+                mass: datos.properties.mass,
+                color_skin: datos.properties.skin_color,
+              };
+              console.log(datos);
+              return datos;
+            case "starship":
+              console.log("star");
+              break;
+            case "vehicle":
+              console.log("veh");
+              break;
+            case "specie":
+              console.log("specie");
+              break;
+            case "planet":
+              console.log("pla");
+              break;
+            default:
+              break;
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
     },
   };
 };

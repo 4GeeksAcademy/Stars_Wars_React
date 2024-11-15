@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router";
 
 const Carta = ({ id, nombre, url, categoria }) => {
   const { store, actions } = useContext(Context);
   const [Favorito, setFavorito] = useState(false);
   const [eliminar, setEliminar] = useState(false);
+  const IndividualView = useNavigate();
 
   useEffect(() => {
     Favorito === true
@@ -69,11 +71,16 @@ const Carta = ({ id, nombre, url, categoria }) => {
             {nombre === "unknown" ? " ¿?" : nombre}
           </p>
           <p class="card-title luz fw-bold">
-            {categoria === "unknown" ? " ¿?" : categoria}
+            {categoria === "unknown" ? " ¿?" : "(" + categoria + ")"}
           </p>
           <div className="row pt-3">
             <div className="col-8">
-              <button className="fw-bold text-white btn btn-outline-dark w-100 rounded-0 border-3 border-bottom-0 border-start-0 borde-carta border-white">
+              <button
+                className="fw-bold text-white btn btn-outline-dark w-100 rounded-0 border-3 border-bottom-0 border-start-0 borde-carta border-white"
+                onClick={() => {
+                  IndividualView(`/Individual/${categoria}/${id}`);
+                }}
+              >
                 See More
               </button>
             </div>

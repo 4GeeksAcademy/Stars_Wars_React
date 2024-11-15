@@ -12,6 +12,7 @@ const ListaPersonajes = () => {
   const [Input, setInput] = useState("");
 
   const Buscar = () => {
+    setPagina([0, store.Valor]);
     setTabla(Tabla.filter((elem) => elem.name.toLowerCase().includes(Input)));
   };
 
@@ -31,7 +32,6 @@ const ListaPersonajes = () => {
     Input.length > e.target.value.length ? setTabla(store.All) : "";
     setInput(e.target.value);
     e.target.value.length === 0 ? setTabla(store.All) : "";
-    console.log(Tabla + "handle");
   };
   return (
     <div className=" lista-contenedor bg-dark py-3 borde-luz">
@@ -86,7 +86,6 @@ const ListaPersonajes = () => {
             <div
               onClick={() => {
                 setTabla(store.Naves);
-                setPagina([0, store.Valor]);
               }}
             >
               <Action titulo="Starships" />
