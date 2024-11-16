@@ -1,0 +1,146 @@
+button:hover {
+  background-color: #d3d3d3;
+}
+
+.carta:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.fondo-img {
+  background-image: url(https://www.somosxbox.com/wp-content/uploads/2015/07/Starwars_Battlefront_Wallpaper_2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+}
+
+.lista-contenedor {
+  background-image: url(https://lumiere-a.akamaihd.net/v1/images/star-wars-backgrounds-25_bc15ec98.jpeg?download=true);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.text-img {
+  font-size: 75px;
+  text-shadow: 0 0 16px white;
+  color: transparent;
+  -webkit-text-stroke: 2px white;
+}
+
+.lista-personajes {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 800px;
+}
+
+.lista-personajes::-webkit-scrollbar {
+  scrollbar-width: thin;
+  width: 20px;
+  background-color: transparent;
+}
+
+.lista-personajes::-webkit-scrollbar-thumb {
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 5px;
+  cursor: grab;
+}
+
+.lista-personajes::-webkit-scrollbar-thumb:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.lista-personajes::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
+}
+
+.boton:hover {
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 2px white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  border: 2px solid white !important;
+}
+.boton:active {
+  transform: scale(0.95);
+}
+
+.boton-valor {
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 2px white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  border: 2px solid white !important;
+}
+.boton-valor:active {
+  transform: scale(0.95);
+}
+
+input:focus {
+  outline: none !important;
+  box-shadow: 0 0 15px red !important;
+}
+input {
+  height: 55px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+.button_home:focus {
+  outline: none !important;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7) !important;
+}
+.flechas {
+  font-size: 25px;
+  padding: 10px 60px;
+}
+.flechas:hover {
+  background-color: black;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 2px white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.flechas:active {
+  transform: scale(0.95);
+}
+
+.flecha-desactivada {
+  font-size: 25px;
+  padding: 10px 60px;
+  box-shadow: 0 0 0 rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 2px white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+  opacity: 0.5;
+}
+
+.borde-carta {
+  box-shadow: 0 0 15px rgba(137, 137, 137, 0.7);
+}
+
+.icono_favoritos {
+  font-weight: 900;
+  width: 27px;
+  height: 27px;
+  box-shadow: 0 0 5px yellow;
+  border-radius: 50%;
+}
+
+@media (max-width: 450px) {
+  .card {
+    width: 10rem !important;
+  }
+  .lista-personajes {
+    height: 850px !important;
+  }
+  .id {
+    font-size: 15px !important;
+  }
+  .flechas {
+    font-size: 15px !important;
+    padding: 15px 25px !important;
+  }
+  .flecha-desactivada {
+    font-size: 15px !important;
+    padding: 15px 25px !important;
+  }
+}
