@@ -241,10 +241,12 @@ const getState = ({ getStore, getActions, setStore }) => {
               const planetaUrl = datos.properties.homeworld;
               const id_planeta = getActions().SacarId(planetaUrl);
 
-              const planeta = getStore().Planetas.find(
+              const planeta = await getStore().Planetas.find(
                 (elem) => elem.uid === id_planeta
               );
-              datos = {
+
+              datos = await {
+                img: `https://starwars-visualguide.com/assets/img/characters/${datos.uid}.jpg`,
                 nombre_planeta: planeta.name,
                 id_planeta: planeta.uid,
                 img_planeta: planeta.url,
@@ -255,24 +257,39 @@ const getState = ({ getStore, getActions, setStore }) => {
                 genero: datos.properties.gender,
                 color_pelo: datos.properties.hair_color,
                 altura: datos.properties.height,
-                planeta: datos.properties.homeworld,
                 mass: datos.properties.mass,
                 color_skin: datos.properties.skin_color,
               };
               console.log(datos);
               return datos;
             case "film":
-              let ejemplo = [];
-              const lista = datos.properties.characters.filter((elem) => {
-                const a = getStore().personajes.find((personaje) => {
-                  if (personaje.uid === getActions().SacarId(elem)) {
-                    ejemplo.push(personaje.name);
-                  }
-                });
-              });
-              console.log(ejemplo);
-              console.log(datos);
+              const Characters = getActions().FiltrarTabla(
+                datos.properties.characters,
+                getStore().personajes
+              );
+              const Planetas = getActions().FiltrarTabla(
+                datos.properties.planets,
+                getStore().Planetas
+              );
+              const Species = getActions().FiltrarTabla(
+                datos.properties.species,
+                getStore().Especies
+              );
+              const Starships = getActions().FiltrarTabla(
+                datos.properties.starships,
+                getStore().Naves
+              );
+              const Vehicles = getActions().FiltrarTabla(
+                datos.properties.vehicles,
+                getStore().Vehiculos
+              );
+
               datos = {
+                characters: Characters,
+                planetas: Planetas,
+                especies: Species,
+                naves: Starships,
+                vehiculos: Vehicles,
                 title: datos.properties.title,
                 id: datos.uid,
                 descripcion: datos.description,
@@ -280,23 +297,99 @@ const getState = ({ getStore, getActions, setStore }) => {
                 texto_apertura: datos.properties.opening_crawl,
                 productor: datos.properties.producer,
                 fecha_salida: datos.properties.release_date,
-                planeta: datos.properties.homeworld,
-                mass: datos.properties.mass,
-                color_skin: datos.properties.skin_color,
               };
               console.log(datos);
               return datos;
             case "starship":
-              console.log("star");
+              const Pilotos = getActions().FiltrarTabla(
+                datos.properties.pilots,
+                getStore().personajes
+              );
+              console.log(datos);
+              datos = {
+                pilotos: Pilotos,
+                name: datos.properties.name,
+                id: datos.uid,
+                descripcion: datos.description,
+                pasajeros: datos.properties.passengers,
+                capacidad: datos.properties.cargo_capacity,
+                consumables: datos.properties.consumables,
+                cost: datos.properties.cost_in_credits,
+                crew: datos.properties.crew,
+                hyperdrive: datos.properties.hyperdrive_rating,
+                largo: datos.properties.length,
+                creador: datos.properties.manufacturer,
+                max_speed: datos.properties.max_atmosphering_speed,
+                modelo: datos.properties.model,
+                class: datos.properties.starship_class,
+              };
               break;
             case "vehicle":
-              console.log("veh");
+              const Pilotos_vehiculos = getActions().FiltrarTabla(
+                datos.properties.pilots,
+                getStore().personajes
+              );
+              datos = {
+                pilotos: Pilotos_vehiculos,
+                name: datos.properties.name,
+                id: datos.uid,
+                descripcion: datos.description,
+                pasajeros: datos.properties.passengers,
+                capacidad: datos.properties.cargo_capacity,
+                consumables: datos.properties.consumables,
+                cost: datos.properties.cost_in_credits,
+                crew: datos.properties.crew,
+                hyperdrive: datos.properties.hyperdrive_rating,
+                largo: datos.properties.length,
+                creador: datos.properties.manufacturer,
+                max_speed: datos.properties.max_atmosphering_speed,
+                modelo: datos.properties.model,
+                class: datos.properties.starship_class,
+              };
               break;
             case "specie":
-              console.log("specie");
+              const people = getActions().FiltrarTabla(
+                datos.properties.people,
+                getStore().personajes
+              );
+              const PlanetaUrl = datos.properties.homeworld;
+              const Id_planeta = getActions().SacarId(PlanetaUrl);
+
+              const Planeta = getStore().Planetas.find(
+                (elem) => elem.uid === Id_planeta
+              );
+
+              datos = {
+                nombre_planeta: Planeta.name,
+                id_planeta: Planeta.uid,
+                img_planeta: Planeta.url,
+                people: people,
+                heigth: datos.properties.average_height,
+                lifespan: datos.properties.average_lifespan,
+                id: datos.uid,
+                descripcion: datos.description,
+                clasificacion: datos.properties.classification,
+                designacion: datos.properties.designation,
+                color_ojos: datos.properties.eye_colors,
+                color_pelo: datos.properties.hair_colors,
+                lenguaje: datos.properties.language,
+                name: datos.properties.name,
+              };
               break;
             case "planet":
-              console.log("pla");
+              datos = {
+                clima: datos.properties.climate,
+                diametro: datos.properties.diameter,
+                id: datos.uid,
+                descripcion: datos.description,
+                gravedad: datos.properties.gravity,
+                periodo_orbital: datos.properties.orbital_period,
+                popular: datos.properties.population,
+                velocidad: datos.properties.rotation_period,
+                water_surface: datos.properties.surface_water,
+                terreno: datos.properties.terrain,
+              };
+              console.log(datos);
               break;
             default:
               break;

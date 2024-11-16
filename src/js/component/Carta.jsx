@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router";
 
-const Carta = ({ id, nombre, url, categoria }) => {
+const Carta = ({ id, nombre, url, categoria, individual }) => {
   const { store, actions } = useContext(Context);
   const [Favorito, setFavorito] = useState(false);
   const [eliminar, setEliminar] = useState(false);
@@ -37,43 +37,48 @@ const Carta = ({ id, nombre, url, categoria }) => {
         class="card p-0 m-0 border-3 borde-carta border-white  fondo m-2 "
         style={{ width: "11rem" }}
       >
-        <div
-          className={
-            Favorito === nombre && categoria != "Favorite"
-              ? "d-none"
-              : "row m-0 bg-white text-warning fw-bold py-1"
-          }
-          onClick={() => {
-            categoria === "Favorite"
-              ? actions.QuitarFavoritos(nombre)
-              : setFavorito(Favorito === false ? true : false);
-
-            categoria === "Favorite" ? setEliminar(true) : "";
-          }}
-        >
+        <div className={individual === true ? "d-none" : ""}>
           <div
             className={
-              categoria === "Favorite"
-                ? "col-12 text-center text-danger fw-bold mx-0"
-                : "col-12 text-center mx-0"
+              Favorito === nombre && categoria != "Favorite"
+                ? "d-none"
+                : "row m-0 bg-white text-warning fw-bold py-1"
             }
+            onClick={() => {
+              Favorito === true ? setFavorito : "";
+              categoria === "Favorite"
+                ? actions.QuitarFavoritos(nombre)
+                : setFavorito(true);
+
+              categoria === "Favorite" ? setEliminar(true) : "";
+            }}
           >
-            <span>{categoria === "Favorite" ? "Delete" : "AddToFavorite"}</span>
+            <div
+              className={
+                categoria === "Favorite"
+                  ? "col-12 text-center text-danger fw-bold mx-0"
+                  : "col-12 text-center mx-0"
+              }
+            >
+              <span>
+                {categoria === "Favorite" ? "Delete" : "AddToFavorite"}
+              </span>
+            </div>
           </div>
         </div>
         <img
           src={url}
-          class="card-img-top border-bottom borde-carta border-white rounded-0"
+          class=" border-bottom borde-carta border-white rounded-0"
           alt=""
         />
         <div class="text-center text-white">
           <p class="card-title py-2 fw-bold">
             {nombre === "unknown" ? " ¿?" : nombre}
           </p>
-          <p class="card-title luz fw-bold">
+          <p class={individual === true ? "d-none" : "card-title luz fw-bold"}>
             {categoria === "unknown" ? " ¿?" : "(" + categoria + ")"}
           </p>
-          <div className="row pt-3">
+          <div className={individual === true ? "d-none" : "row pt-3"}>
             <div className="col-8">
               <button
                 className="fw-bold text-white btn btn-outline-dark w-100 rounded-0 border-3 border-bottom-0 border-start-0 borde-carta border-white"

@@ -1,0 +1,81 @@
+.contenedor {
+  background-image: url(https://lumiere-a.akamaihd.net/v1/images/star-wars-backgrounds-25_bc15ec98.jpeg?download=true);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 650px;
+}
+
+p {
+  overflow-wrap: break-word;
+}
+
+.agrandar:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.texto {
+  font-weight: bold;
+  color: white;
+}
+
+.contenedor-img {
+  height: 150px;
+  width: 100%;
+}
+
+.datos-fisicos {
+  height: 350px;
+}
+
+.datos-generales {
+  height: 200px;
+}
+
+.contenedor_pelicula {
+  height: 500px;
+}
+.scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.scroll::-webkit-scrollbar {
+  scrollbar-width: thin;
+  width: 20px;
+  background-color: black;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 0px;
+  cursor: grab;
+}
+
+.scroll::-webkit-scrollbar-thumb:hover {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.scroll::-webkit-scrollbar-thumb:active {
+  cursor: grabbing;
+}
+
+.btn_film {
+  outline: none !important;
+}
+.btn_film:hover {
+  color: white;
+  border: 2px solid white;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+.text-loading {
+  font-size: 150px;
+}
+
+.icon-loading {
+  font-size: 50px;
+}

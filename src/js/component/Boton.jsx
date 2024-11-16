@@ -8,8 +8,8 @@ const Boton = ({ valor }) => {
       <button
         className={
           store.Valor === valor || (store.Valor === 300 && valor === "ALL")
-            ? "boton-valor btn bg-black border border-2 text-white fw-bold w-75"
-            : "btn bg-black border border-2 text-white fw-bold opacity-50 w-75"
+            ? "boton-valor btn bg-black border border-2 text-white fw-bold w-75 button_home"
+            : "btn bg-black border border-2 text-white fw-bold opacity-50 w-75 button_home"
         }
         onClick={() => {
           valor === "ALL"
