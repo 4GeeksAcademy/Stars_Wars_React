@@ -37,6 +37,19 @@ p {
 .contenedor_pelicula {
   height: 500px;
 }
+
+@media (max-width: 450px) {
+  .datos-fisicos {
+    height: 200px !important;
+  }
+  .datos-generales {
+    height: 100px !important;
+  }
+  .contenedor_pelicula {
+    height: 250px !important;
+  }
+}
+
 .scroll {
   overflow-y: auto;
   overflow-x: hidden;

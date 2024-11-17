@@ -42,3 +42,7 @@ body {
   width: 100px;
   height: 80px;
 }
+.elemento_tabla:hover {
+  text-shadow: 0 0 4px white;
+  cursor: pointer;
+}

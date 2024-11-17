@@ -5,70 +5,56 @@ import Carta from "../Carta.jsx";
 import ElementoTabla from "./ElementoTabla.jsx";
 
 const Film = ({ objeto }) => {
-  let datos = {
-    img: "https://starwars-visualguide.com/assets/img/films/5.jpg",
-    characters: [
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-      "Personaje",
-    ],
-    planetas: "Planetas",
-    especies: "Species",
-    naves: "Starships",
-    vehiculos: "Vehicles",
-    title: "datos.properties.title",
-    id: "datos.uid",
-    descripcion: " datos.description",
-    director: "datos.properties.director",
-    texto_apertura: "datos.properties.opening_crawl",
-    productor: " datos.properties.producer",
-    fecha_salida: " datos.properties.release_date",
-  };
   const { categoria, id } = useParams();
-  const [btn, setBtn] = useState("personajes");
-  const [tabla, setTabla] = useState(datos.characters);
+  const [btn, setBtn] = useState("personaje");
+  const [tabla, setTabla] = useState(objeto.characters);
 
   return (
     <div className="container-fluid my-3 texto">
       <div className="row">
-        <div className="col-8"></div>
+        <div className="col-4 row h-50">
+          <div className="col-6">
+            {" "}
+            <Carta
+              url={`https://starwars-visualguide.com/assets/img/films/${id}.jpg`}
+              categoria={categoria}
+              individual={true}
+            />
+          </div>
+          <div className="col-6 align-content-center text-center">
+            <h2 className="luz">{categoria}</h2>
+          </div>
+          <div className="mt-3">
+            <div className="col-12 text-center py-1">
+              <h3 className=" luz">Aperture Text</h3>
+            </div>
+            <div className="col-12 py-1 text-center">
+              <p className=" px-3">{objeto.texto_apertura}</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-4 contenedor_pelicula rounded-2 p-3 text-center scroll">
+          <span className="fs-3 mx-2 texto py-3">Data</span>
+          <DatosElemento nombre="Title" propiedad={objeto.title} />
+          <DatosElemento nombre="Director" propiedad={objeto.director} />
+          <DatosElemento nombre="Producer" propiedad={objeto.productor} />
+          <DatosElemento
+            nombre="Realesa Date"
+            propiedad={objeto.fecha_salida}
+          />
+        </div>
         <div className="col-4">
           <div className="col-12 d-flex flex-column text-end">
-            <div className="d-flex">
+            <div className="d-flex border-bottom border-2">
               <button
                 className={
                   btn === "personaje"
-                    ? "btn bg-dark rounded-0 texto luz btn_film mx-1 borde-luz"
-                    : "btn bg-white rounded-0 text-black fw-bold btn_film mx-1"
+                    ? "btn rounded-0 texto luz btn_film mx-1 borde-luz border border-2 border-bottom-0"
+                    : "btn  rounded-0 texto btn_film mx-1"
                 }
                 onClick={() => {
                   setBtn("personaje");
-                  setTabla(datos.characters);
+                  setTabla(objeto.characters);
                 }}
               >
                 Characters
@@ -76,12 +62,12 @@ const Film = ({ objeto }) => {
               <button
                 className={
                   btn === "planeta"
-                    ? "btn bg-dark rounded-0 texto luz btn_film mx-1 borde-luz"
-                    : "btn bg-white rounded-0 text-black fw-bold btn_film mx-1"
+                    ? "btn rounded-0 texto luz btn_film mx-1 borde-luz border border-2 border-bottom-0"
+                    : "btn  rounded-0 texto btn_film mx-1"
                 }
                 onClick={() => {
                   setBtn("planeta");
-                  setTabla(datos.planetas);
+                  setTabla(objeto.planetas);
                 }}
               >
                 Planets
@@ -89,12 +75,12 @@ const Film = ({ objeto }) => {
               <button
                 className={
                   btn === "especies"
-                    ? "btn bg-dark rounded-0 texto luz btn_film mx-1 borde-luz"
-                    : "btn bg-white rounded-0 text-black fw-bold btn_film mx-1"
+                    ? "btn rounded-0 texto luz btn_film mx-1 borde-luz border border-2 border-bottom-0"
+                    : "btn  rounded-0 texto btn_film mx-1"
                 }
                 onClick={() => {
                   setBtn("especies");
-                  setTabla(datos.especies);
+                  setTabla(objeto.especies);
                 }}
               >
                 Species
@@ -102,12 +88,12 @@ const Film = ({ objeto }) => {
               <button
                 className={
                   btn === "naves"
-                    ? "btn bg-dark rounded-0 texto luz btn_film mx-1 borde-luz"
-                    : "btn bg-white rounded-0 text-black fw-bold btn_film mx-1"
+                    ? "btn rounded-0 texto luz btn_film mx-1 borde-luz border border-2 border-bottom-0"
+                    : "btn  rounded-0 texto btn_film mx-1"
                 }
                 onClick={() => {
                   setBtn("naves");
-                  setTabla(datos.naves);
+                  setTabla(objeto.naves);
                 }}
               >
                 Naves
@@ -115,18 +101,18 @@ const Film = ({ objeto }) => {
               <button
                 className={
                   btn === "vehiculos"
-                    ? "btn bg-dark rounded-0 texto luz btn_film mx-1 borde-luz"
-                    : "btn bg-white rounded-0 text-black fw-bold btn_film mx-1"
+                    ? "btn rounded-0 texto luz btn_film mx-1 borde-luz border border-2 border-bottom-0"
+                    : "btn  rounded-0 texto btn_film mx-1"
                 }
                 onClick={() => {
                   setBtn("vehiculos");
-                  setTabla(datos.vehiculos);
+                  setTabla(objeto.vehiculos);
                 }}
               >
                 Vehiculo
               </button>
             </div>
-            <div className="contenedor_pelicula bg-white rounded-3 scroll">
+            <div className="contenedor_pelicula rounded-3 scroll">
               {tabla.map((elem) => {
                 return <ElementoTabla nombre={elem} />;
               })}

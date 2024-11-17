@@ -13,6 +13,20 @@ export const Individual = () => {
   const [obj, setObj] = useState([]);
   const [cargado, setCargado] = useState(false);
 
+  const Individual = () => {
+    switch (categoria.toLowerCase()) {
+      case "film":
+        return <Film objeto={obj} />;
+        break;
+      case "character":
+        return <Character objeto={obj} />;
+        break;
+
+      default:
+        break;
+    }
+  };
+
   const conseguirdatos = async () => {
     const Objeto = await actions.ConseguirDatosInvidual(categoria, id);
     setObj(Objeto);
@@ -21,13 +35,11 @@ export const Individual = () => {
 
   useEffect(() => {
     conseguirdatos();
-
-    console.log(obj);
   }, []);
   return (
     <>
       <div className="contenedor">
-        {cargado === true ? <Film objeto={obj} /> : <VentanaCarga />}
+        {cargado === true ? Individual() : <VentanaCarga />}
       </div>
     </>
   );

@@ -260,7 +260,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 mass: datos.properties.mass,
                 color_skin: datos.properties.skin_color,
               };
-              console.log(datos);
               return datos;
             case "film":
               const Characters = getActions().FiltrarTabla(
@@ -285,6 +284,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               );
 
               datos = {
+                img: `https://starwars-visualguide.com/assets/img/films/${datos.properties.episode_id}.jpg`,
                 characters: Characters,
                 planetas: Planetas,
                 especies: Species,
