@@ -6,6 +6,9 @@ import { useParams } from "react-router";
 import { Context } from "../store/appContext.js";
 import Film from "../component/Indiviual/Film.jsx";
 import VentanaCarga from "../component/Indiviual/VentanaCarga.jsx";
+import StarShip_Vehicle from "../component/Indiviual/StarShip&Vehicle.jsx";
+import Planeta from "../component/Indiviual/Planeta.jsx";
+import Specie from "../component/Indiviual/Specie.jsx";
 
 export const Individual = () => {
   const { categoria, id } = useParams();
@@ -20,6 +23,18 @@ export const Individual = () => {
         break;
       case "character":
         return <Character objeto={obj} />;
+        break;
+      case "starship":
+        return <StarShip_Vehicle objeto={obj} />;
+        break;
+      case "vehicle":
+        return <StarShip_Vehicle objeto={obj} />;
+        break;
+      case "planet":
+        return <Planeta objeto={obj} />;
+        break;
+      case "specie":
+        return <Specie objeto={obj} />;
         break;
 
       default:

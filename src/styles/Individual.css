@@ -4,7 +4,7 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  height: 650px;
+  height: auto;
 }
 
 p {
@@ -38,27 +38,57 @@ p {
   height: 500px;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 768px) {
   .datos-fisicos {
     height: 200px !important;
   }
   .datos-generales {
-    height: 100px !important;
+    height: 150px !important;
   }
   .contenedor_pelicula {
     height: 250px !important;
   }
+  .ocultar {
+    display: none !important;
+  }
+  .text-loading {
+    font-size: 75px !important;
+  }
+
+  .icon-loading {
+    font-size: 25px !important;
+  }
+  .contenedor_carga {
+    height: 575px;
+  }
+  .card {
+    height: auto !important;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .contenedor_carga {
+    height: 830px;
+  }
+}
+
+.contenedor_carga {
+  height: 630px;
 }
 
 .scroll {
   overflow-y: auto;
   overflow-x: hidden;
 }
+.scroll-izquierdo {
+  direction: rtl;
+}
 
 .scroll::-webkit-scrollbar {
   scrollbar-width: thin;
   width: 20px;
-  background-color: black;
+  background-color: white;
 }
 
 .scroll::-webkit-scrollbar-thumb {
