@@ -3,8 +3,9 @@ import Carta from "../Carta.jsx";
 import { useParams } from "react-router";
 import DatosElemento from "./DatosElemento.jsx";
 import PlanetaCarta from "./PlanetaCarta.jsx";
+import ElementoTabla from "./ElementoTabla.jsx";
 
-const Character = ({ objeto }) => {
+const Specie = ({ objeto }) => {
   console.log(objeto);
   const { categoria, id } = useParams();
 
@@ -17,7 +18,7 @@ const Character = ({ objeto }) => {
             <Carta
               id={objeto.id}
               nombre={objeto.nombre}
-              url={objeto.img === undefined ? objeto.url : objeto.img}
+              url={`https://starwars-visualguide.com/assets/img/species/${id}.jpg`}
               categoria={"specie"}
               individual={true}
             />
@@ -27,10 +28,13 @@ const Character = ({ objeto }) => {
               <h2 className="luz">{categoria}</h2>
             </div>
           </div>
-          <div className="col-lg-12 col-12 mx-0 border border-2 text-center scroll objeto-generales bg-black agrandar rounded-3 mx-md-2">
-            <span className="fs-3 luz mx-2">General Data</span>
-            <DatosElemento nombre="Mass" propiedad={objeto.mass} />
-            <DatosElemento nombre="Gender" propiedad={objeto.genero} />
+          <div className="col-lg-12 col-12 mx-0 border border-2 text-center scroll datos-generales agrandar rounded-3 mx-md-2 p-lg-0">
+            <span className="fs-3 luz">Characters</span>
+            <div className="">
+              {objeto.people.map((elem) => {
+                return <ElementoTabla nombre={elem} />;
+              })}
+            </div>
           </div>
         </div>
 
@@ -53,16 +57,22 @@ const Character = ({ objeto }) => {
           </div>
         </div>
         <div className="col-lg-4 col-12 col-md-6 my-md-3 my-3 my-md-0 text-center border border-2 bg-white rounded-3 text-dark scroll contenedor_pelicula agrandar">
-          <span className="fs-3 mx-2">Aspect</span>
+          <span className="fs-3 mx-2">Data</span>
           <DatosElemento nombre="Name" propiedad={objeto.nombre} />
-          <DatosElemento nombre="Heigth" propiedad={objeto.altura + " cm"} />
-          <DatosElemento nombre="Skin Color" propiedad={objeto.color_skin} />
+          <DatosElemento nombre="Lenguage" propiedad={objeto.lenguaje} />
+          <DatosElemento nombre="Lifespan" propiedad={objeto.lifespan} />
+          <DatosElemento nombre="Heigth" propiedad={objeto.heigth} />
           <DatosElemento nombre="Hair Color" propiedad={objeto.color_pelo} />
           <DatosElemento nombre="Eye color" propiedad={objeto.color_ojos} />
+          <DatosElemento
+            nombre="Classification"
+            propiedad={objeto.clasificacion}
+          />
+          <DatosElemento nombre="Designation" propiedad={objeto.designacion} />
         </div>
       </div>
     </div>
   );
 };
 
-export default Character;
+export default Specie;

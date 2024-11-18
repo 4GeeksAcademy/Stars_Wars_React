@@ -260,7 +260,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 mass: datos.properties.mass,
                 color_skin: datos.properties.skin_color,
               };
-              console.log(datos);
               return datos;
             case "film":
               const Characters = getActions().FiltrarTabla(
@@ -285,6 +284,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               );
 
               datos = {
+                img: `https://starwars-visualguide.com/assets/img/films/${datos.properties.episode_id}.jpg`,
                 characters: Characters,
                 planetas: Planetas,
                 especies: Species,
@@ -298,14 +298,14 @@ const getState = ({ getStore, getActions, setStore }) => {
                 productor: datos.properties.producer,
                 fecha_salida: datos.properties.release_date,
               };
-              console.log(datos);
+
               return datos;
             case "starship":
               const Pilotos = getActions().FiltrarTabla(
                 datos.properties.pilots,
                 getStore().personajes
               );
-              console.log(datos);
+
               datos = {
                 pilotos: Pilotos,
                 name: datos.properties.name,
@@ -323,6 +323,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 modelo: datos.properties.model,
                 class: datos.properties.starship_class,
               };
+              return datos;
               break;
             case "vehicle":
               const Pilotos_vehiculos = getActions().FiltrarTabla(
@@ -346,6 +347,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 modelo: datos.properties.model,
                 class: datos.properties.starship_class,
               };
+              return datos;
               break;
             case "specie":
               const people = getActions().FiltrarTabla(
@@ -375,9 +377,11 @@ const getState = ({ getStore, getActions, setStore }) => {
                 lenguaje: datos.properties.language,
                 name: datos.properties.name,
               };
+              return datos;
               break;
             case "planet":
               datos = {
+                name: datos.properties.name,
                 clima: datos.properties.climate,
                 diametro: datos.properties.diameter,
                 id: datos.uid,
@@ -389,7 +393,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 water_surface: datos.properties.surface_water,
                 terreno: datos.properties.terrain,
               };
-              console.log(datos);
+
+              return datos;
               break;
             default:
               break;

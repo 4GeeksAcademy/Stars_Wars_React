@@ -72,7 +72,7 @@ const Carta = ({ id, nombre, url, categoria, individual }) => {
           alt=""
         />
         <div class="text-center text-white">
-          <p class="card-title py-2 fw-bold">
+          <p class={individual === true ? "d-none" : "card-title py-2 fw-bold"}>
             {nombre === "unknown" ? " ¿?" : nombre}
           </p>
           <p class={individual === true ? "d-none" : "card-title luz fw-bold"}>
